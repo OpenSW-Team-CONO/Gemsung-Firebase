@@ -26,6 +26,30 @@ exports.triggerProfileReady = functions.database
     switch (original.flag) {
       case 1:
         console.log("ready for process");
+
+        let options = {
+          uri: "https://gemsung.herokuapp.com/video",
+          method: "POST",
+          body: original,
+          json: true //json으로 보낼경우 true로 해주어야 header값이 json으로 설정됩니다.
+        };
+
+        const request = require("request");
+
+        // request.post(options, function(err, httpResponse, body) {
+        //   if (err) {
+        //     console.error("request err", err);
+        //   }
+        //   console.log("body", body);
+        // });
+        request.post(options, (error, res, body) => {
+          if (error) {
+            console.error("request", error);
+            return;
+          }
+          console.log(`statusCode: ${res.statusCode}`);
+          console.log(body);
+        });
         break;
       default:
         break;
