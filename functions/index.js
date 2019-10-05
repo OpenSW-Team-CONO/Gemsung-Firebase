@@ -25,12 +25,16 @@ exports.triggerProfileReady = functions.database
 
     switch (original.flag) {
       case 1:
-        console.log("ready for process");
+        const data = {
+          videoKey: context.params.profileKey,
+          src: original.src
+        }
+        console.log("ready for process data:", data);
 
         let options = {
-          uri: "https://gemsung.herokuapp.com/video",
+          uri: "http://3.115.252.11/generate",
           method: "POST",
-          body: original,
+          body: data,
           json: true //json으로 보낼경우 true로 해주어야 header값이 json으로 설정됩니다.
         };
 
